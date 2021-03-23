@@ -7,10 +7,10 @@ public class Jugador extends Entity<JugadorId> {
 
     private final Nombre nombre;
     private final Profesion profesion;
-    private final telefonoAyudaAmigo telefonoAmigo;
+    private final TelefonoAyudaAmigo telefonoAmigo;
     private Capital capital;
 
-    public Jugador(JugadorId entityId, Nombre nombre, Profesion profesion, telefonoAyudaAmigo telefonoAmigo, Capital capital) {
+    public Jugador(JugadorId entityId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo, Capital capital) {
         super(entityId);
         this.nombre = nombre;
         this.profesion = profesion;
@@ -32,7 +32,7 @@ public class Jugador extends Entity<JugadorId> {
         return profesion;
     }
 
-    public telefonoAyudaAmigo telefonoAmigo() {
+    public TelefonoAyudaAmigo telefonoAmigo() {
         return telefonoAmigo;
     }
 
