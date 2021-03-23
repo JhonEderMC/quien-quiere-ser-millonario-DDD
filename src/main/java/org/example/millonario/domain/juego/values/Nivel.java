@@ -20,6 +20,10 @@ public class Nivel implements ValueObject<Integer> {
         this.nivel=1; //por defecto
     }
 
+    public static Nivel of(int i) {
+        return new Nivel(i);
+    }
+
     public Integer nivel() {
         return nivel;
     }
