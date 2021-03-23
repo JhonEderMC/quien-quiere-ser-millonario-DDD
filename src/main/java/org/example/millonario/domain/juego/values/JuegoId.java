@@ -7,4 +7,7 @@ public class JuegoId  extends Identity {
     public JuegoId(String uuid) {
         super(uuid);
     }
+
+    public JuegoId() {
+    }
 }
