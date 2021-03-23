@@ -5,21 +5,21 @@ import co.com.sofka.domain.generic.ValueObject;
 import java.util.Objects;
 
 public class Nombre implements ValueObject<String> {
-    private final String nombre;
+    private final String value;
 
     public Nombre(String nombre) {
         if (nombre.isBlank()){
             throw new IllegalArgumentException("El nombre no puede ser en blanco");
         }
-        this.nombre = Objects.requireNonNull(nombre, "El nombre no puede ser nulo");
+        this.value = Objects.requireNonNull(nombre, "El nombre no puede ser nulo");
     }
 
     public String nombre() {
-        return nombre;
+        return value;
     }
 
     @Override
     public String value() {
-        return this.nombre;
+        return this.value;
     }
 }
