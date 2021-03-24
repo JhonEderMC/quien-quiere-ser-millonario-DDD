@@ -14,6 +14,10 @@ public class TelefonoAyudaAmigo implements ValueObject<String>{
         this.value = Objects.requireNonNull(telefono, "El telefono no puede ser nulo");
     }
 
+    public static TelefonoAyudaAmigo of(String value) {
+        return new TelefonoAyudaAmigo(value);
+    }
+
     @Override
     public String value() {
         return this.value;
