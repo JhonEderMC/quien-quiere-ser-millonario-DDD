@@ -1,7 +1,7 @@
 package org.example.millonario.domain.juego.command;
 
 import co.com.sofka.domain.generic.Command;
-import org.example.millonario.domain.juego.Respuesta;
+import org.example.millonario.domain.juego.values.Respuesta;
 import org.example.millonario.domain.juego.values.Descripcion;
 import org.example.millonario.domain.juego.values.PreguntaId;
 

@@ -3,6 +3,7 @@ package org.example.millonario.domain.juego;
 import co.com.sofka.domain.generic.Entity;
 import org.example.millonario.domain.juego.values.Descripcion;
 import org.example.millonario.domain.juego.values.PreguntaId;
+import org.example.millonario.domain.juego.values.Respuesta;
 
 import java.util.Set;
 
