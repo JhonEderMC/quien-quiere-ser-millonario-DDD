@@ -27,5 +27,8 @@ public class CambiosJuego extends EventChange {
                     new Pregunta(event.preguntaId(), event.descripcion(), event.respuestas())
             );
         });
+        apply((JuegoIniciado event)->{
+            juego.juegoInicializado = Boolean.TRUE;
+        });
     }
 }
