@@ -44,4 +44,8 @@ public class Juego extends AggregateEvent<JuegoId> {
     public void agregarPregunta(PreguntaId preguntaId, Descripcion descripcion, Set<Respuesta> respuestas ){
         appendChange(new PreguntaCreada(preguntaId,descripcion, respuestas)).apply();
     }
+
+    public void iniciarJuego(JuegoId juegoId){
+        appendChange(new JuegoIniciado(juegoId)).apply();
+    }
 }
