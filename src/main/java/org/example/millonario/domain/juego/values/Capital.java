@@ -14,7 +14,11 @@ public class Capital implements ValueObject<Integer> {
         this.capital = Objects.requireNonNull(capital, "El capita es requerido");
     }
 
-    public static Capital of(int value) {
+    public Capital() {
+        this.capital=0;
+    }
+
+    public static Capital of(Integer value) {
         return new Capital(value);
     }
 
