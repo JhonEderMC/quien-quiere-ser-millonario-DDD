@@ -4,8 +4,10 @@ import co.com.sofka.domain.generic.EventChange;
 import org.example.millonario.domain.juego.events.JuegoBase;
 import org.example.millonario.domain.juego.events.JugadorCreado;
 import org.example.millonario.domain.juego.events.PreguntaCreada;
+import org.example.millonario.domain.juego.events.RondaCreada;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CambiosJuego extends EventChange {
     public CambiosJuego(Juego juego) {
@@ -29,6 +31,11 @@ public class CambiosJuego extends EventChange {
         });
         apply((JuegoIniciado event)->{
             juego.juegoInicializado = Boolean.TRUE;
+        });
+        apply((RondaCreada event)->{
+            juego.rondas.put(event.rondaId(),
+                    new Ronda(event.rondaId(), event.preguntaId())
+            );
         });
     }
 }

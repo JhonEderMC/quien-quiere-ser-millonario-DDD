@@ -2,9 +2,7 @@ package org.example.millonario.domain.juego;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import org.example.millonario.domain.juego.events.JuegoBase;
-import org.example.millonario.domain.juego.events.JugadorCreado;
-import org.example.millonario.domain.juego.events.PreguntaCreada;
+import org.example.millonario.domain.juego.events.*;
 import org.example.millonario.domain.juego.values.*;
 
 import java.util.List;
@@ -34,7 +32,6 @@ public class Juego extends AggregateEvent<JuegoId> {
         var juego = new Juego(juegoId);
         eventList.forEach(juego::applyEvent);
         return juego;
-
     }
 
     public void crearJugador(JugadorId jugadorId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo,Capital capital){
@@ -43,9 +40,15 @@ public class Juego extends AggregateEvent<JuegoId> {
 
     public void agregarPregunta(PreguntaId preguntaId, Descripcion descripcion, Set<Respuesta> respuestas ){
         appendChange(new PreguntaCreada(preguntaId,descripcion, respuestas)).apply();
+        crearRonda(RondaId.of(preguntaId.value()), preguntaId);
     }
 
     public void iniciarJuego(JuegoId juegoId){
         appendChange(new JuegoIniciado(juegoId)).apply();
+    }
+
+    public void crearRonda(RondaId rondaId,PreguntaId preguntaId ){
+        appendChange(new RondaCreada( rondaId, preguntaId)).apply();
+
     }
 }
