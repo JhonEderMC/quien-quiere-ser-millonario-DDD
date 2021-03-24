@@ -10,4 +10,8 @@ public class JuegoId  extends Identity {
 
     public JuegoId() {
     }
+
+    public static JuegoId of(String value) {
+        return new JuegoId(value);
+    }
 }

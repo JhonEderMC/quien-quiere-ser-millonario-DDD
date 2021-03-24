@@ -14,6 +14,10 @@ public class Capital implements ValueObject<Integer> {
         this.capital = Objects.requireNonNull(capital, "El capita es requerido");
     }
 
+    public static Capital of(int value) {
+        return new Capital(value);
+    }
+
     public Capital aumentar(Integer aumentar){
         if(aumentar<0){
             throw new IllegalArgumentException("El aumento tiene que se run numero positivo");

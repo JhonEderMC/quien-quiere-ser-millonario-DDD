@@ -14,6 +14,10 @@ public class Profesion implements ValueObject<String> {
         this.value = Objects.requireNonNull(profesion, "El nombre no puede ser nulo");
     }
 
+    public static Profesion of(String value) {
+        return new Profesion(value);
+    }
+
     @Override
     public String value() {
         return this.value;

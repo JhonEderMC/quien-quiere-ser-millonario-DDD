@@ -14,6 +14,10 @@ public class Nombre implements ValueObject<String> {
         this.value = Objects.requireNonNull(nombre, "El nombre no puede ser nulo");
     }
 
+    public static Nombre of(String value) {
+        return new Nombre(value);
+    }
+
     public String nombre() {
         return value;
     }
