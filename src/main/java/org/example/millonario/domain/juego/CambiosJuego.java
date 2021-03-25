@@ -1,11 +1,9 @@
 package org.example.millonario.domain.juego;
 
 import co.com.sofka.domain.generic.EventChange;
-import org.example.millonario.domain.juego.events.JuegoBase;
-import org.example.millonario.domain.juego.events.JugadorCreado;
-import org.example.millonario.domain.juego.events.PreguntaCreada;
-import org.example.millonario.domain.juego.events.RondaCreada;
+import org.example.millonario.domain.juego.events.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,6 +34,12 @@ public class CambiosJuego extends EventChange {
             juego.rondas.put(event.rondaId(),
                     new Ronda(event.rondaId(), event.preguntaId())
             );
+        });
+        apply((RespuestaJugadorCreado event)->{
+             var listRonda = (ArrayList) juego.rondas.keySet();
+             var rondaKeyMap = listRonda.get(juego.jugador.posicion());
+             juego.rondas.get(rondaKeyMap).responderPregunta(event.respuestaJugador());
+             juego.jugador.aumentarPosicion();
         });
     }
 }
