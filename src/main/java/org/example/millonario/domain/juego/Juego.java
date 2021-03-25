@@ -54,4 +54,8 @@ public class Juego extends AggregateEvent<JuegoId> {
     public void crearRespuesta(RespuestaJugador respuesta){
         appendChange(new RespuestaJugadorCreado(respuesta)).apply();
     }
+
+    public void retirarJugador(JugadorId jugadorId) {
+        appendChange( new JugadorRetirado(jugadorId)).apply();
+    }
 }

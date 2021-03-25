@@ -41,5 +41,8 @@ public class CambiosJuego extends EventChange {
              juego.rondas.get(rondaKeyMap).responderPregunta(event.respuestaJugador());
              juego.jugador.aumentarPosicion();
         });
+        apply((JugadorRetirado event)->{
+            juego.jugador.retirarJugador();
+        });
     }
 }

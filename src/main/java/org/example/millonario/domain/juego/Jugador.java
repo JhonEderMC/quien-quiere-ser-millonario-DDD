@@ -10,6 +10,7 @@ public class Jugador extends Entity<JugadorId> {
     private final TelefonoAyudaAmigo telefonoAmigo;
     private Capital capital;
     private Integer posicion;
+    private Retirado retirado;
 
     public Jugador(JugadorId entityId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo, Capital capital) {
         super(entityId);
@@ -18,6 +19,7 @@ public class Jugador extends Entity<JugadorId> {
         this.telefonoAmigo = telefonoAmigo;
         this.capital = capital;
         this.posicion=0;
+        this.retirado = Retirado.of(Boolean.FALSE);
     }
 
     public void aumentarCapital(Capital capital){
@@ -48,5 +50,9 @@ public class Jugador extends Entity<JugadorId> {
 
     public void aumentarPosicion(){
         this.posicion++;
+    }
+
+    public void retirarJugador(){
+        this.retirado = Retirado.of(Boolean.TRUE);
     }
 }
