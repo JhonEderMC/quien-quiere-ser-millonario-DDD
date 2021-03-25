@@ -27,7 +27,7 @@ public class RabbitMQConsumer implements Flow.Subscription {
     }
 
     @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = "millonario.handles", durable = "true"),
+            value = @Queue(value = "juego.handles", durable = "true"),
             exchange = @Exchange(value = "core-millonario", type = "topic"),
             key = "millonario.juego.#"
     ))
