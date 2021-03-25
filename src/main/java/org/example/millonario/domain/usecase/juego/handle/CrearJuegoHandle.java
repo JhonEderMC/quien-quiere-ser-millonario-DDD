@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @CommandHandles
-@CommandType(name = "millonario.juego.juegocreado", aggregate = "juego")
+@CommandType(name = "millonario.juego.crear", aggregate = "juego")
 public class CrearJuegoHandle extends UseCaseExecutor {
 
     private RequestCommand<CrearJuegoBase> request;
