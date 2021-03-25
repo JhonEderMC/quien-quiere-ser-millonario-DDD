@@ -5,6 +5,7 @@ import org.example.millonario.domain.juego.events.Puntaje;
 import org.example.millonario.domain.juego.events.RondaId;
 import org.example.millonario.domain.juego.values.JugadorId;
 import org.example.millonario.domain.juego.values.PreguntaId;
+import org.example.millonario.domain.juego.values.RespuestaJugador;
 
 public class Ronda extends Entity<RondaId> {
 
@@ -13,6 +14,7 @@ public class Ronda extends Entity<RondaId> {
 
     private final PreguntaId preguntaId;
     private Puntaje puntaje;
+    private RespuestaJugador respuesta;
 
     public Ronda(RondaId entityId, PreguntaId preguntaId) {
         super(entityId);
@@ -26,5 +28,9 @@ public class Ronda extends Entity<RondaId> {
 
     public Puntaje puntaje() {
         return puntaje;
+    }
+
+    public void responderPregunta(RespuestaJugador respuesta){
+        this.respuesta = respuesta;
     }
 }
