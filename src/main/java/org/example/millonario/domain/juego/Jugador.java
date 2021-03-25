@@ -9,6 +9,7 @@ public class Jugador extends Entity<JugadorId> {
     private final Profesion profesion;
     private final TelefonoAyudaAmigo telefonoAmigo;
     private Capital capital;
+    private Integer posicion;
 
     public Jugador(JugadorId entityId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo, Capital capital) {
         super(entityId);
@@ -16,6 +17,7 @@ public class Jugador extends Entity<JugadorId> {
         this.profesion = profesion;
         this.telefonoAmigo = telefonoAmigo;
         this.capital = capital;
+        this.posicion=0;
     }
 
     public void aumentarCapital(Capital capital){
@@ -38,5 +40,13 @@ public class Jugador extends Entity<JugadorId> {
 
     public Capital capital() {
         return capital;
+    }
+
+    public Integer posicion() {
+        return posicion;
+    }
+
+    public void aumentarPosicion(){
+        this.posicion++;
     }
 }
