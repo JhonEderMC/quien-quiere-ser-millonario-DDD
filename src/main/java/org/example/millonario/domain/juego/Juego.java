@@ -49,6 +49,9 @@ public class Juego extends AggregateEvent<JuegoId> {
 
     public void crearRonda(RondaId rondaId,PreguntaId preguntaId ){
         appendChange(new RondaCreada( rondaId, preguntaId)).apply();
+    }
 
+    public void crearRespuesta(RespuestaJugador respuesta){
+        appendChange(new RespuestaJugadorCreado(respuesta)).apply();
     }
 }
