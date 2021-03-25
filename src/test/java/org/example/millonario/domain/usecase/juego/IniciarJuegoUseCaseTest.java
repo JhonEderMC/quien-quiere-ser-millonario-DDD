@@ -44,10 +44,6 @@ class IniciarJuegoUseCaseTest {
 
         var juegoIniciado = (JuegoIniciado) events.get(0);
         Assertions.assertEquals(juegoId.value(), juegoIniciado.aggregateRootId());
-
-
-
-
     }
 
     private List<DomainEvent> getDomainEvents(JuegoId juegoId,JugadorCreado triggerEvent ,IniciarJuegoUseCase useCase) {
