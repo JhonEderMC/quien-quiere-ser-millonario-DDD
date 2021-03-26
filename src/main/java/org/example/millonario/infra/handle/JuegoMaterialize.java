@@ -3,10 +3,7 @@ package org.example.millonario.infra.handle;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.millonario.domain.juego.Pregunta;
-import org.example.millonario.domain.juego.events.JuegoBase;
-import org.example.millonario.domain.juego.events.JugadorCreado;
-import org.example.millonario.domain.juego.events.PreguntaCreada;
-import org.example.millonario.domain.juego.events.RespuestaJugadorCreado;
+import org.example.millonario.domain.juego.events.*;
 import org.example.millonario.domain.juego.values.Respuesta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -83,6 +80,17 @@ public class JuegoMaterialize {
         update.set("repuesta",respuestaJugador.respuestaJugador().value());
 
         mongoTemplate.updateFirst(getFilterByAggregateId(respuestaJugador), update, COLLECTION_NAME);
+    }
+
+    @Async
+    @EventListener
+    public  void handledEventRetirarJugador(JugadorRetirado jugadorRetirado){
+        logger.info("****** Handle event respuestajugador");
+        Update update = new Update();
+
+        update.set("jugadorId",jugadorRetirado.getJugadorId());
+
+        mongoTemplate.updateFirst(getFilterByAggregateId(jugadorRetirado), update, COLLECTION_NAME);
     }
 
     private Query getFilterByAggregateId(DomainEvent event) {
