@@ -6,6 +6,7 @@ import org.example.millonario.domain.juego.Pregunta;
 import org.example.millonario.domain.juego.events.JuegoBase;
 import org.example.millonario.domain.juego.events.JugadorCreado;
 import org.example.millonario.domain.juego.events.PreguntaCreada;
+import org.example.millonario.domain.juego.events.RespuestaJugadorCreado;
 import org.example.millonario.domain.juego.values.Respuesta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +41,7 @@ public class JuegoMaterialize {
         Map<String, Object> data = new HashMap<>();
         data.put("_id", juegoBase.juegoId().value());
         data.put("juegoInicializado", false);
+
         mongoTemplate.save(data, COLLECTION_NAME);
     }
 
@@ -69,6 +71,18 @@ public class JuegoMaterialize {
             update.set("respuesta."+id+".descripcion",respuesta.value().descripcion().value());
             update.set("respuesta."+id+".estado",respuesta.value().estado().value());
         }
+        mongoTemplate.updateFirst(getFilterByAggregateId(preguntaCreada), update, COLLECTION_NAME);
+    }
+
+    @Async
+    @EventListener
+    public void handledEventRespuestaJugador(RespuestaJugadorCreado respuestaJugador){
+        logger.info("****** Handle event respuestajugador");
+        Update update = new Update();
+
+        update.set("repuesta",respuestaJugador.respuestaJugador().value());
+
+        mongoTemplate.updateFirst(getFilterByAggregateId(respuestaJugador), update, COLLECTION_NAME);
     }
 
     private Query getFilterByAggregateId(DomainEvent event) {

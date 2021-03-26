@@ -1,9 +1,8 @@
 package org.example.millonario.domain.juego;
 
 import co.com.sofka.domain.generic.Entity;
-import org.example.millonario.domain.juego.events.Puntaje;
+import org.example.millonario.domain.juego.values.Puntaje;
 import org.example.millonario.domain.juego.events.RondaId;
-import org.example.millonario.domain.juego.values.JugadorId;
 import org.example.millonario.domain.juego.values.PreguntaId;
 import org.example.millonario.domain.juego.values.RespuestaJugador;
 
