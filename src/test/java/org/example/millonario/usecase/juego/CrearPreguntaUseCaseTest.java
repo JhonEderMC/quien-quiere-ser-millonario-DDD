@@ -1,6 +1,7 @@
-package org.example.millonario.domain.usecase.juego;
+package org.example.millonario.usecase.juego;
 
 
+import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
@@ -50,7 +51,7 @@ class CrearPreguntaUseCaseTest {
     }
 
 
-   /* @Test
+    /*@Test
    void errorAlCrearPregunta(){
         var command = crearCommandError();
 
@@ -65,8 +66,8 @@ class CrearPreguntaUseCaseTest {
             getDomainEvents(juegoId, command, useCase);
             }, "Deben haber 4 respuestas");
 
-    }*/
-
+    }
+*/
     private List<DomainEvent> getDomainEvents(JuegoId juegoId, CrearPregunta command, CrearPreguntaUseCase useCase) {
         return UseCaseHandler.getInstance()
                 .setIdentifyExecutor(juegoId.value())
@@ -87,6 +88,7 @@ class CrearPreguntaUseCaseTest {
 
     private CrearPregunta crearCommand() {
         return new CrearPregunta(
+                juegoId,
                 PreguntaId.of("pregunta1"),
                 Descripcion.of("descripcion1"),
                 Set.of(new Respuesta(Descripcion.of("descripcion respuesta 1"), Estado.of(Boolean.FALSE)),
@@ -98,6 +100,7 @@ class CrearPreguntaUseCaseTest {
 
     private CrearPregunta crearCommandError() {
         return new CrearPregunta(
+                juegoId,
                 PreguntaId.of("pregunta1"),
                 Descripcion.of("descripcion1"),
                 Set.of(new Respuesta(Descripcion.of("descripcion respuesta 1"), Estado.of(Boolean.FALSE)),

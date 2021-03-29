@@ -2,6 +2,7 @@ package org.example.millonario.domain.juego.events;
 
 import co.com.sofka.domain.generic.DomainEvent;
 import org.example.millonario.domain.juego.values.PreguntaId;
+import org.example.millonario.domain.juego.values.RondaId;
 
 public class RondaCreada extends DomainEvent {
     private final RondaId rondaId;

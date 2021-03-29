@@ -1,12 +1,13 @@
-package org.example.millonario.domain.usecase.juego.handle;
+package org.example.millonario.usecase.juego.handle;
 
 import co.com.sofka.business.annotation.CommandHandles;
 import co.com.sofka.business.annotation.CommandType;
 import co.com.sofka.business.asyn.UseCaseExecutor;
 import co.com.sofka.business.support.RequestCommand;
 import org.example.millonario.domain.juego.command.CrearRespuestaJugador;
+import org.example.millonario.domain.juego.values.JuegoId;
 import org.example.millonario.domain.juego.values.RespuestaJugador;
-import org.example.millonario.domain.usecase.juego.CrearRespuestaJugadorUseCase;
+import org.example.millonario.usecase.juego.CrearRespuestaJugadorUseCase;
 
 
 import java.util.Map;
@@ -28,9 +29,8 @@ public class CrearRespuestaJugadorHandle extends UseCaseExecutor {
         var respuesta = Objects.requireNonNull(args.get("respuesta").split(","));
 
         request = new RequestCommand<>(new CrearRespuestaJugador(
-                RespuestaJugador.
-                        of(Integer.
-                                valueOf(respuesta[0])))
+                JuegoId.of(aggregateId()),
+                RespuestaJugador.of(Integer.valueOf(respuesta[0])))
         );
     }
 }

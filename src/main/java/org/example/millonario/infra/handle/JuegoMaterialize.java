@@ -15,10 +15,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Component
@@ -62,12 +59,14 @@ public class JuegoMaterialize {
         logger.info("****** Handle event preguntaCreada");
         Update update = new Update();
         var id = preguntaCreada.preguntaId().value();
+        update.set("preguntaId",id);
         update.set("pregunta."+id+".descripcion",preguntaCreada.descripcion().value());
-        List<Respuesta> respuestas =(ArrayList) preguntaCreada.respuestas();
+        Set<Respuesta> respuestas = preguntaCreada.respuestas();
         for (Respuesta respuesta: respuestas){
             update.set("respuesta."+id+".descripcion",respuesta.value().descripcion().value());
             update.set("respuesta."+id+".estado",respuesta.value().estado().value());
         }
+
         mongoTemplate.updateFirst(getFilterByAggregateId(preguntaCreada), update, COLLECTION_NAME);
     }
 

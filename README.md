@@ -53,5 +53,7 @@ Se puede reutiliza la infraestructura diseñada en el ejemplo.
 | Realiza la materialización de los eventos.                                                     | 10.0 %     |
 
 
+**Nota:** Se realiza el juego quien quiere ser millonario.
+![img.png](img.png)
 [https_github.com_Sofka-XT_ddd-generic-java]: https://github.com/Sofka-XT/ddd-generic-java
 [https_github.com_Sofka-XT_java-ddd-demo-dice]: https://github.com/Sofka-XT/java-ddd-demo-dice

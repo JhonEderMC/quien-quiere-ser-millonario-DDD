@@ -1,4 +1,4 @@
-package org.example.millonario.domain.usecase.juego;
+package org.example.millonario.usecase.juego;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
@@ -17,7 +17,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +28,7 @@ class CrearJugadorUseCaseTest {
     @Test
     void crearJugador(){
         var juegoId = JuegoId.of("juego1");
-        var command = new CrearJugador(
+        var command = new CrearJugador(juegoId,
                 JugadorId.of("jugador1"), Nombre.of("daniel"),
                 Profesion.of("cantante"), TelefonoAyudaAmigo.of("1313131"),
                 Capital.of(300));

@@ -1,12 +1,13 @@
-package org.example.millonario.domain.usecase.juego.handle;
+package org.example.millonario.usecase.juego.handle;
 
 import co.com.sofka.business.annotation.CommandHandles;
 import co.com.sofka.business.annotation.CommandType;
 import co.com.sofka.business.asyn.UseCaseExecutor;
 import co.com.sofka.business.support.RequestCommand;
 import org.example.millonario.domain.juego.command.CrearJuegoBase;
+import org.example.millonario.domain.juego.values.JuegoId;
 import org.example.millonario.domain.juego.values.Nivel;
-import org.example.millonario.domain.usecase.juego.CrearJuegoBaseUseCase;
+import org.example.millonario.usecase.juego.CrearJuegoBaseUseCase;
 
 import java.util.Map;
 import java.util.Objects;
@@ -24,10 +25,11 @@ public class CrearJuegoHandle extends UseCaseExecutor {
 
     @Override
     public void accept(Map<String, String> args) {
+
         var text = Objects.requireNonNull(args.get("nivel").split(","));
         var nivel = Integer.valueOf(text[0]);
 
-        request = new RequestCommand<>(new CrearJuegoBase(Nivel.of(nivel)));
+        request = new RequestCommand<>(new CrearJuegoBase(Nivel.of(nivel), JuegoId.of(aggregateId())));
 
     }
 }

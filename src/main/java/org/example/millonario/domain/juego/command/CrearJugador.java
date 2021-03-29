@@ -10,13 +10,19 @@ public class CrearJugador implements Command {
     private final Profesion profesion;
     private final TelefonoAyudaAmigo telefonoAmigo;
     private final Capital capital;
+    private final JuegoId juegoId;
 
-    public CrearJugador(JugadorId jugadorId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo, Capital capital) {
+    public CrearJugador(JuegoId juegoId, JugadorId jugadorId, Nombre nombre, Profesion profesion, TelefonoAyudaAmigo telefonoAmigo, Capital capital) {
+        this.juegoId = juegoId;
         this.jugadorId = jugadorId;
         this.nombre = nombre;
         this.profesion = profesion;
         this.telefonoAmigo = telefonoAmigo;
         this.capital = capital;
+    }
+
+    public JuegoId juegoId() {
+        return juegoId;
     }
 
     public JugadorId jugadorId() {

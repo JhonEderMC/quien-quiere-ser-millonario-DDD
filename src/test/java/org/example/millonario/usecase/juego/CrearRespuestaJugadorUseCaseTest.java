@@ -1,16 +1,15 @@
-package org.example.millonario.domain.usecase.juego;
+package org.example.millonario.usecase.juego;
 
-
+import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.business.support.TriggeredEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import org.example.millonario.domain.juego.JuegoIniciado;
-import org.example.millonario.domain.juego.command.CrearPregunta;
+import org.example.millonario.domain.juego.command.CrearRespuestaJugador;
 import org.example.millonario.domain.juego.events.JuegoBase;
 import org.example.millonario.domain.juego.events.JugadorCreado;
 import org.example.millonario.domain.juego.events.PreguntaCreada;
+import org.example.millonario.domain.juego.events.RespuestaJugadorCreado;
 import org.example.millonario.domain.juego.values.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,33 +22,41 @@ import java.util.List;
 import java.util.Set;
 
 @ExtendWith(MockitoExtension.class)
-class IniciarJuegoUseCaseTest {
+class CrearRespuestaJugadorUseCaseTest {
 
     @Mock
-    private DomainEventRepository repository;
+    DomainEventRepository repository;
 
-    private JuegoId juegoId = JuegoId.of("juego1");
+    private JuegoId juegoId = JuegoId.of("xxx");
 
     @Test
-    void iniciarJuego(){
-        var eventTrigger = eventJugadorCreado();
-        var useCase = new IniciarJuegoUseCase();
+    void crearRespuesta(){
+        var command = new CrearRespuestaJugador(juegoId, new RespuestaJugador(4));
+        var useCase = new CrearRespuestaJugadorUseCase();
 
         Mockito.when(repository.getEventsBy(juegoId.value())).thenReturn(listEvent(juegoId));
         useCase.addRepository(repository);
 
-        eventTrigger.setAggregateRootId(juegoId.value());
+        var events = getDomainEvents(juegoId, command, useCase);
 
-        var events = getDomainEvents(juegoId,eventTrigger, useCase);
+         var respuestaJugador = (RespuestaJugadorCreado) events.get(0);
 
-        var juegoIniciado = (JuegoIniciado) events.get(0);
-        Assertions.assertEquals(juegoId.value(), juegoIniciado.aggregateRootId());
+        Assertions.assertEquals(4, respuestaJugador.respuestaJugador().value());
+
     }
 
-    private List<DomainEvent> getDomainEvents(JuegoId juegoId,JugadorCreado triggerEvent ,IniciarJuegoUseCase useCase) {
+    @Test
+    void errorCrearRespuesta(){
+        Assertions.assertThrows(BusinessException.class, ()->{
+            new CrearRespuestaJugador(juegoId, new RespuestaJugador(7));
+                } , "La respuesta debe estar entre 1 y 4"
+        );
+    }
+
+    private List<DomainEvent> getDomainEvents(JuegoId juegoId,CrearRespuestaJugador commnand , CrearRespuestaJugadorUseCase useCase) {
         return UseCaseHandler.getInstance()
                 .setIdentifyExecutor(juegoId.value())
-                .syncExecutor(useCase, new TriggeredEvent<>(triggerEvent))
+                .syncExecutor(useCase, new RequestCommand<>(commnand))
                 .orElseThrow()
                 .getDomainEvents();
     }
@@ -57,12 +64,13 @@ class IniciarJuegoUseCaseTest {
     private List<DomainEvent> listEvent(JuegoId juegoId) {
         return List.of(
                 new JuegoBase(juegoId, Nivel.of(2)),
+                preguntaCreada(),
                 new JugadorCreado(JugadorId.of("jugador1"),
                         Nombre.of("Diego"),
                         Profesion.of("Descripcion jugador 1"),
                         TelefonoAyudaAmigo.of("13131313"),
-                        Capital.of(0)),
-                preguntaCreada()
+                        Capital.of(0))
+
         );
     }
 
@@ -77,14 +85,5 @@ class IniciarJuegoUseCaseTest {
         );
     }
 
-    private JugadorCreado eventJugadorCreado() {
-        return  new JugadorCreado(
-                JugadorId.of("jg1"),
-                Nombre.of("Diego"),
-                Profesion.of("saada"),
-                TelefonoAyudaAmigo.of("dadad"),
-                Capital.of(20)
-        );
-    }
 
 }

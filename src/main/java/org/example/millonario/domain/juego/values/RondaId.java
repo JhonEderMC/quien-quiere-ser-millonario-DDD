@@ -1,7 +1,6 @@
-package org.example.millonario.domain.juego.events;
+package org.example.millonario.domain.juego.values;
 
 import co.com.sofka.domain.generic.Identity;
-import org.example.millonario.domain.juego.Ronda;
 
 public class RondaId extends Identity {
     public RondaId(String uuid) {

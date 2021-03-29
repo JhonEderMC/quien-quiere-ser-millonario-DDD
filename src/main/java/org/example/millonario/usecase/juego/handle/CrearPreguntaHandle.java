@@ -1,15 +1,12 @@
-package org.example.millonario.domain.usecase.juego.handle;
+package org.example.millonario.usecase.juego.handle;
 
 import co.com.sofka.business.annotation.CommandHandles;
 import co.com.sofka.business.annotation.CommandType;
 import co.com.sofka.business.asyn.UseCaseExecutor;
 import co.com.sofka.business.support.RequestCommand;
 import org.example.millonario.domain.juego.command.CrearPregunta;
-import org.example.millonario.domain.juego.values.Descripcion;
-import org.example.millonario.domain.juego.values.Estado;
-import org.example.millonario.domain.juego.values.PreguntaId;
-import org.example.millonario.domain.juego.values.Respuesta;
-import org.example.millonario.domain.usecase.juego.CrearPreguntaUseCase;
+import org.example.millonario.domain.juego.values.*;
+import org.example.millonario.usecase.juego.CrearPreguntaUseCase;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -30,20 +27,21 @@ public class CrearPreguntaHandle extends UseCaseExecutor {
     @Override
     public void accept(Map<String, String> args) {
         Set<Respuesta> respuestas = new HashSet<>();
-        var id = Objects.requireNonNull(args.get("jugadorId").split(","));
+        var id = Objects.requireNonNull(args.get("preguntaId").split(","));
         var  desripcion = Objects.requireNonNull(args.get("descripcion").split(","));
         var descripRespuesta = Objects.requireNonNull(args.get("descripRespuesta").split(","));
         var estadoRespuesta = Objects.requireNonNull(args.get("estadoRespuesta").split(","));
 
         for (int i = 0; i <descripRespuesta.length ; i++) {
             respuestas.add(
-                    Respuesta.of(Descripcion.of(descripRespuesta[i]),
-                            Estado.of(toBoolean(estadoRespuesta[i])))
+                    Respuesta.of(Descripcion.of(descripRespuesta[i].trim()),
+                            Estado.of(toBoolean(estadoRespuesta[i].trim())))
             );
         }
 
         request = new RequestCommand<>(new CrearPregunta(
-                PreguntaId.of(id[0]), Descripcion.of(descripRespuesta[0]),
+                JuegoId.of(aggregateId()),
+                PreguntaId.of(id[0].trim()), Descripcion.of(descripRespuesta[0].trim()),
                 respuestas)
         );
 

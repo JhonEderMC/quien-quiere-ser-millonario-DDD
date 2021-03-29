@@ -1,4 +1,4 @@
-package org.example.millonario.domain.usecase.juego.handle;
+package org.example.millonario.usecase.juego.handle;
 
 import co.com.sofka.business.annotation.CommandHandles;
 import co.com.sofka.business.annotation.CommandType;
@@ -7,7 +7,7 @@ import co.com.sofka.business.support.RequestCommand;
 import org.example.millonario.domain.juego.command.RetirarVoluntarioJugador;
 import org.example.millonario.domain.juego.values.JuegoId;
 import org.example.millonario.domain.juego.values.JugadorId;
-import org.example.millonario.domain.usecase.juego.RetirarVoluntarioJugadorUseCase;
+import org.example.millonario.usecase.juego.RetirarVoluntarioJugadorUseCase;
 
 import java.util.Map;
 import java.util.Objects;

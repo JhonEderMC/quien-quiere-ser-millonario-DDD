@@ -1,10 +1,9 @@
-package org.example.millonario.domain.usecase.juego;
+package org.example.millonario.usecase.juego;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import org.example.millonario.domain.juego.Juego;
 import org.example.millonario.domain.juego.command.RetirarVoluntarioJugador;
 import org.example.millonario.domain.juego.events.JuegoBase;
 import org.example.millonario.domain.juego.events.JugadorCreado;
@@ -18,8 +17,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class RetirarVoluntarioJugadorUseCaseTest {
