@@ -27,7 +27,7 @@ public class CrearPreguntaHandle extends UseCaseExecutor {
     @Override
     public void accept(Map<String, String> args) {
         Set<Respuesta> respuestas = new HashSet<>();
-        var id = Objects.requireNonNull(args.get("preguntaId").split(","));
+        var preguntaId = Objects.requireNonNull(args.get("preguntaId").split(","));
         var  desripcion = Objects.requireNonNull(args.get("descripcion").split(","));
         var descripRespuesta = Objects.requireNonNull(args.get("descripRespuesta").split(","));
         var estadoRespuesta = Objects.requireNonNull(args.get("estadoRespuesta").split(","));
@@ -41,7 +41,7 @@ public class CrearPreguntaHandle extends UseCaseExecutor {
 
         request = new RequestCommand<>(new CrearPregunta(
                 JuegoId.of(aggregateId()),
-                PreguntaId.of(id[0].trim()), Descripcion.of(descripRespuesta[0].trim()),
+                PreguntaId.of(preguntaId[0].trim()), Descripcion.of(desripcion[0].trim()),
                 respuestas)
         );
 
