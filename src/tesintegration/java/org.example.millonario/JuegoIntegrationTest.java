@@ -45,6 +45,7 @@ public class JuegoIntegrationTest extends CommandBaseIntegrationTest{
                 ), requestFields(
                 fieldWithPath("commandType").description("Tipo de comando"),
                 fieldWithPath("aggregateId").description("Identificador del agregado"),
+                fieldWithPath("preguntaId").description("Identificador de la pregunta"),
                 fieldWithPath("descripcion").description("Descripcion de la pregunta"),
                 fieldWithPath("descripRespuesta").description("Descripcion de la respuesta"),
                 fieldWithPath("estadoRespuesta").description("Estado de la respuesta")
